@@ -3,11 +3,11 @@ import { useState } from 'react'
 function Form() {
     
     const [formData, setFormData] = useState({
-        label: "Favorite Football Team",
+        label: "Favorite College Team",
         multiSelect: true,
         required: false,
         defaultValue: "Michigan State",
-        choices: ["Michigan State", "Texas"]
+        choices: ["Michigan State", "Texas", "Indiana"]
     })
     const [newChoice, setNewChoice] = useState("")
 
@@ -96,11 +96,27 @@ function Form() {
         e.preventDefault()
         if(formValidations()){
             console.log("gotcha!")
-        } else {
-            console.log(formData)
-            defaultValueCheck()
+            return
+        }
+        defaultValueCheck()
+
+        let body = {
+            label: label,
+            required: required,
+            choices: choices,
+            default: defaultValue,
+            displayAlpha: true
         }
 
+        fetch("http://www.mocky.io/v2/566061f21200008e3aabd919", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data, body))
     }
 
     const onClearForm = (e) => {

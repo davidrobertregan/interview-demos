@@ -3,11 +3,11 @@ import { useState } from 'react'
 function Form() {
     
     const [formData, setFormData] = useState({
-        label: "string",
-        multSelect: true,
+        label: "Favorite Football Team",
+        multiSelect: true,
         required: false,
-        defaultValue: "default",
-        choices: []
+        defaultValue: "Michigan State",
+        choices: ["Michigan State", "Texas"]
     })
     const [newChoice, setNewChoice] = useState("")
 
@@ -17,8 +17,21 @@ function Form() {
         setNewChoice(e.target.value)
     }
 
+    const checkForDupicates = (choice) => {
+        let duplicates = choices.filter(c => c === choice)
+        if(duplicates.length > 0){
+            return true
+        }
+        return false
+    }
+
     const onAddChoice = (e) => {
         e.preventDefault()
+        if(checkForDupicates(newChoice)) {
+            alert("this choice already exists")
+            return
+        }
+
         setFormData({
             ...formData,
             choices: [...choices, newChoice]
@@ -49,17 +62,57 @@ function Form() {
             })
         }
     }
-    
+
+    // validation function
+    // - label is present?
+    // - 50+ choices?
+
+    const formValidations = () => {
+        if(label === "") { 
+            alert("a label must be present") 
+            return true
+        }
+        if(choices.length > 50) {
+            alert("there can be no more than 50 answers for a question")
+            return true
+        } else {
+            return false
+        }
+    }
+// validations check
+// default value in choices check
+
+    const defaultValueCheck = () => {
+        let arr = choices.filter(c => c === defaultValue)
+        if(arr.length === 0){
+            setFormData({
+                ...formData,
+                choices: [...choices, defaultValue]
+            })
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if(formValidations()){
+            console.log("gotcha!")
+        } else {
+            console.log(formData)
+            defaultValueCheck()
+        }
+
+    }
+
     return(
         <div className={"form-card"}>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="row">
                     <label>Label</label>
                     <input name='label' onChange={onFormChange} value={label} type="text"></input>
                 </div>
                 <div className="row">
                     <label>Type</label>
-                    <select name='multi-select'>
+                    <select name='multiselect'>
                         <option>Multi-select</option>
                     </select>
                     <input name='required' onChange={onFormChange} checked={required} type="checkbox"></input>
@@ -71,7 +124,7 @@ function Form() {
                 </div>
                 <div className="row">
                     <label>Choices</label>
-                    {choices.map(c => <button name={c} onClick={onDeleteChoice}>{c}</button>)}
+                    {choices.map(c => <button key={c} name={c} onClick={onDeleteChoice}>{c}</button>)}
                     <input value={newChoice} onChange={onChoiceChange} type="text" placeholder='add choice'></input>
                     <button type='click' onClick={onAddChoice}>➕</button>
                 </div>

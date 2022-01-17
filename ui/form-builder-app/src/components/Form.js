@@ -134,32 +134,36 @@ function Form() {
     return(
         <div className={"form-card"}>
             <form onSubmit={handleSubmit}>
-                <div className="row">
+                    <h3>Field Builder</h3>
+                <div className="column-container">
                     <label>Label</label>
                     <input name='label' onChange={onFormChange} value={label} type="text"></input>
                 </div>
-                <div className="row">
+                <div className="column-container">
                     <label>Type</label>
                     <select name='multiselect'>
                         <option>Multi-select</option>
                     </select>
-                    <input name='required' onChange={onFormChange} checked={required} type="checkbox"></input>
-                    <label>A value is required</label>
                 </div>
-                <div className="row">
+                <div className='column-container'>
+                    <label>A value is required</label>
+                    <input name='required' onChange={onFormChange} checked={required} type="checkbox"></input>
+                </div>
+                <div className="column-container">
                     <label>Default Value</label>
                     <input name='defaultValue' onChange={onFormChange} value={defaultValue} type="text"></input>
                 </div>
-                <div className="row">
+                <div className="column-container">
                     <label>Choices</label>
+                    <div className='row-container'>
                     {choices.map(c => <button key={c} name={c} onClick={onDeleteChoice}>{c}</button>)}
-                    <input value={newChoice} onChange={onChoiceChange} type="text" placeholder='add choice'></input>
+                    <input  value={newChoice} onChange={onChoiceChange} type="text" placeholder='add choice'></input>
                     <button type='click' onClick={onAddChoice}>➕</button>
+                    </div>
                 </div>
-                <div className="row">
+                <div className="column-container">
                     <button type="submit">Save</button>
-                    <a>Cancel</a>
-                    <button onClick={onClearForm}>Clear Form</button>
+                    <a onClick={onClearForm}>Cancel</a>
                 </div>
             </form>
         </div>

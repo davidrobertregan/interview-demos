@@ -22,3 +22,21 @@ code {
     border: 3px solid cadetblue;
     padding: 10px;
 }
+
+.form-card > form > div {
+  padding: 3%;
+}
+
+.column-container {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+}
+
+.row-container {
+  display: grid;
+  grid-template-rows: auto;
+}
+
+a {
+  color: red;
+}

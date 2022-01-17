@@ -103,6 +103,18 @@ function Form() {
 
     }
 
+    const onClearForm = (e) => {
+        e.preventDefault()
+        setFormData(
+            {
+                label: "",
+                multiSelect: true,
+                required: false,
+                defaultValue: " ",
+                choices: []
+            })
+    }
+
     return(
         <div className={"form-card"}>
             <form onSubmit={handleSubmit}>
@@ -131,6 +143,7 @@ function Form() {
                 <div className="row">
                     <button type="submit">Save</button>
                     <a>Cancel</a>
+                    <button onClick={onClearForm}>Clear Form</button>
                 </div>
             </form>
         </div>

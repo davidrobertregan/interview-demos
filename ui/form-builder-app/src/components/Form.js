@@ -4,16 +4,14 @@ function Form() {
     
     const [formData, setFormData] = useState({
         label: "string",
-        type: {
-            multSelect: true,
-            required: true,
-        },
+        multSelect: true,
+        required: false,
         defaultValue: "default",
-        choices: ["option1", "option2"]
+        choices: []
     })
     const [newChoice, setNewChoice] = useState("")
 
-    const { label, type, choices, defaultValue } = formData
+    const { label, required, choices, defaultValue, multiSelect } = formData
 
     const onChoiceChange = (e) => {
         setNewChoice(e.target.value)
@@ -35,24 +33,41 @@ function Form() {
             choices: choices.filter(c => c !== e.target.name)
         })
     }
+
+    const onFormChange = (e) => {
+        let key = e.target.name
+
+        if(key === "required"){
+            setFormData({
+                ...formData,
+                [key]: e.target.checked
+            })
+        } else {
+            setFormData({
+                ...formData,
+                [key]: e.target.value
+            })
+        }
+    }
+    
     return(
         <div className={"form-card"}>
             <form>
                 <div className="row">
                     <label>Label</label>
-                    <input value={label} type="text"></input>
+                    <input name='label' onChange={onFormChange} value={label} type="text"></input>
                 </div>
                 <div className="row">
                     <label>Type</label>
-                    <select>
+                    <select name='multi-select'>
                         <option>Multi-select</option>
                     </select>
-                    <input  value={type.required} type="checkbox"></input>
+                    <input name='required' onChange={onFormChange} checked={required} type="checkbox"></input>
                     <label>A value is required</label>
                 </div>
                 <div className="row">
                     <label>Default Value</label>
-                    <input  value={defaultValue} type="text"></input>
+                    <input name='defaultValue' onChange={onFormChange} value={defaultValue} type="text"></input>
                 </div>
                 <div className="row">
                     <label>Choices</label>

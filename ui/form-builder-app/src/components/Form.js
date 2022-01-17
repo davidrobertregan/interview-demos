@@ -28,7 +28,7 @@ function Form() {
     const onAddChoice = (e) => {
         e.preventDefault()
         if(checkForDupicates(newChoice)) {
-            alert("this choice already exists")
+            alert("Whoops! It looks like this choice already exists.")
             return
         }
 
@@ -63,24 +63,22 @@ function Form() {
         }
     }
 
-    // validation function
-    // - label is present?
-    // - 50+ choices?
+    // this function (fires on handleSubmit) handles the following validations:
+    // - the label is present
+    // - there are no more than 50 choices
 
     const formValidations = () => {
         if(label === "") { 
-            alert("a label must be present") 
+            alert("Whoops, it look like you forgot the label.") 
             return true
         }
         if(choices.length > 50) {
-            alert("there can be no more than 50 answers for a question")
+            alert("You've reached the maximum of 50 choices")
             return true
         } else {
             return false
         }
     }
-// validations check
-// default value in choices check
 
     const defaultValueCheck = () => {
         let arr = choices.filter(c => c === defaultValue)
@@ -134,7 +132,7 @@ function Form() {
     return(
         <div className={"form-card"}>
             <form onSubmit={handleSubmit}>
-                    <h3>Field Builder</h3>
+                <h3>Field Builder</h3>
                 <div className="column-container">
                     <label>Label</label>
                     <input name='label' onChange={onFormChange} value={label} type="text"></input>

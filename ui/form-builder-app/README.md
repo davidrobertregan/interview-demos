@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# User Form Builer 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Process for this project
+1. Reviewed tips online for take home challenges
+2. Read the instructions multiple times
+3. Worked through the core deliverables one by one
+4. Styled the form
 
-## Available Scripts
+## Description of how I approached deliverables 1 & 2
 
-In the project directory, you can run:
+### The builder can add and remove choices
 
-### `npm start`
+- Because each choice is its own seperate element in an array, I thought it would make the most sense to change from a text area to a list of buttons that represent the existing choice. 
+- #### Buttons => for deleting a choice
+    - I used .map() to create a button for each choice. 
+    - For each button, I added an onClick event handler onDeleteChoice that updates the formData with setFormData:
+        1. make a copy of existing formData with spread operator
+        2. update the array of choices using .filter() (line 42 in Form.js)
+- #### Text input => for adding new choices
+    - Similarly, I added a button with a callback function that updates the formData: 
+        1. make a copy of existing formData with spread operator
+        2. updating the array of choices using the spread operator again and adding the new choice.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Validations
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Label field is required 
+- When should this validation fire? As soon as the user submits the form. For this reason, I created a formValidations function that fires in onSubmit
+- formValidations returns true if there is an issue and false if there are none. There's conditional logic in the handleSubmit that will stop the function if it returns true
+- formValidations has a conditional where if the label variable from the formData obj is equal to an empty string, it will fire an alert and return true, stopping handleSubmit
 
-### `npm test`
+#### There cannot be more than 50 choices 
+- formValidations has a conditional where if the array of choices variable in from the formData obj has a length greater than 50, it will fire an alert and return true, stopping handleSubmit
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### There cannot be duplicate choices
+- This validation actually lives in another function since I wanted it to fire when a user creates a new choice
+- When a user clicks to add a choice, checkForDuplicates fires in the onAddChoice: 
+    1. using filter(), we filter through choices from formData and return a new array that contains matches to the newChoice state value that changes on the form input
+    2. if the length of this new array is zero, we know there is no match and it returns false, continuing onAddNewChoice
+    3. if the array length is greater than zero, there are matches, so we alert the user of the issue and stop the function
 
-### `npm run build`
+#### If I had more time
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- This project was a reminder to further hone in on my css skills. If I had more time, I would definitely focus in here.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

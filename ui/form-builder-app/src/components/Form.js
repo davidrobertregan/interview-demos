@@ -156,13 +156,14 @@ function Form() {
                 <div className="column-container">
                     <label>Choices</label>
                     <div className='row-container'>
-                    {choices.map(c => <button key={c} name={c} onClick={onDeleteChoice}>{c}</button>)}
-                    <input  value={newChoice} onChange={onChoiceChange} type="text" placeholder='add choice'></input>
+                    {choices.map(c => <button className='delete' key={c} name={c} onClick={onDeleteChoice}>{c}</button>)}
+                    <input value={newChoice} onChange={onChoiceChange} type="text" placeholder='add choice'></input>
                     <button type='click' onClick={onAddChoice}>➕</button>
                     </div>
                 </div>
                 <div className="column-container">
-                    <button type="submit">Save</button>
+                    <div></div>
+                    <button className='submit' type="submit">Save changes</button>
                     <a onClick={onClearForm}>Cancel</a>
                 </div>
             </form>

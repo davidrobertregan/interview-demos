@@ -6,7 +6,7 @@
 3. Worked through the core deliverables one by one
 4. Styled the form
 
-## <b>How I approached deliverables 1 & 2</b>
+## <b>How I approached two deliverables (1 & 2)</b>
 ### <b>"The builder can add and remove choices"</b>
 
 - I changed the textarea to delete buttons instead so the user could add and delete choices before submitting the form

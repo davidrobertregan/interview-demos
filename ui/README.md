@@ -1,5 +1,10 @@
 # Quick Base Front End Craft Demo
 
+## You can find the [candidate's readme](./form-builder-app/README.md) in form-builder-app directory
+To get the app running:
+  - cd into form-builder-app
+  - run npm install
+  - run npm start
 ## General Description
 
 The purpose of the craft demo is to give us a jumping off point for discussion

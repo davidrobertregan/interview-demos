@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 function Form() {
     
+    // state values and setter functions to create controlled component
     const [formData, setFormData] = useState({
         label: "Favorite College Team",
         multiSelect: true,
@@ -11,13 +12,13 @@ function Form() {
     })
     const [newChoice, setNewChoice] = useState("")
 
-    const { label, required, choices, defaultValue, multiSelect } = formData
+    const { label, required, choices, defaultValue } = formData
 
     const onChoiceChange = (e) => {
         setNewChoice(e.target.value)
     }
 
-    const checkForDupicates = (choice) => {
+    const checkForDuplicates = (choice) => {
         let duplicates = choices.filter(c => c === choice)
         if(duplicates.length > 0){
             return true
@@ -27,7 +28,7 @@ function Form() {
 
     const onAddChoice = (e) => {
         e.preventDefault()
-        if(checkForDupicates(newChoice)) {
+        if(checkForDuplicates(newChoice)) {
             alert("Whoops! It looks like this choice already exists.")
             return
         }
@@ -62,17 +63,12 @@ function Form() {
             })
         }
     }
-
-    // this function (fires on handleSubmit) handles the following validations:
-    // - the label is present
-    // - there are no more than 50 choices
-
+    
     const formValidations = () => {
         if(label === "") { 
             alert("Whoops, it look like you forgot the label.") 
             return true
-        }
-        if(choices.length > 50) {
+        } else if(choices.length > 50) {
             alert("You've reached the maximum of 50 choices")
             return true
         } else {
@@ -96,6 +92,7 @@ function Form() {
             console.log("gotcha!")
             return
         }
+        
         defaultValueCheck()
 
         let body = {
@@ -156,7 +153,7 @@ function Form() {
                     <div className='row-container'>
                     {choices.map(c => <button className='delete' key={c} name={c} onClick={onDeleteChoice}>{c}</button>)}
                     <input value={newChoice} onChange={onChoiceChange} type="text" placeholder='add choice'></input>
-                    <button type='click' onClick={onAddChoice}>➕</button>
+                    <button type='click' onClick={onAddChoice}>Add choice</button>
                     </div>
                 </div>
                 <div className="column-container">
@@ -170,7 +167,3 @@ function Form() {
 }
 
 export default Form
-
-
-// controlled component
-// what does the formData state look like? 

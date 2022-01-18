@@ -47,7 +47,7 @@ function Form() {
             choices: choices.filter(c => c !== e.target.name)
         })
     }
-
+// this function updates the formData state as a user interacts with the form
     const onFormChange = (e) => {
         let key = e.target.name
 
@@ -130,6 +130,7 @@ function Form() {
             })
     }
 
+    // a button is created for each choice with an onDelete handler. This variable is placed below the choices label
     let choiceButtons = choices.map(c => <button type="button" className='delete' key={c} name={c} onClick={onDeleteChoice}>❌ {c}</button>)
 
     return(

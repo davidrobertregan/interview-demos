@@ -31,14 +31,16 @@
 - formValidations has a conditional where if the array of choices variable in from the formData obj has a length greater than 50, it will fire an alert and return true, stopping handleSubmit
 
 #### There cannot be duplicate choices
-- This validation actually lives in another function since I wanted it to fire when a user creates a new choice
+- This validation lives in another function since it should fire when a user creates a new choice
 - When a user clicks to add a choice, checkForDuplicates fires in the onAddChoice: 
     1. using filter(), we filter through choices from formData and return a new array that contains matches to the newChoice state value that changes on the form input
     2. if the length of this new array is zero, we know there is no match and it returns false, continuing onAddNewChoice
     3. if the array length is greater than zero, there are matches, so we alert the user of the issue and stop the function
 
-### <b>If I had more time</b>
+### <b>If I had more time/What I learned</b>
 
+- Admittedly, this was my first take home code challenge in the job process. I put a little too much pressure on myself to do it quickly which led to some unneccessary pressure.
+- I had an issue with the return key deleting choices rather than adding - I learned this had to do with the "type" of the button: https://dzello.com/blog/2017/02/19/demystifying-enter-key-submission-for-react-forms/
 - This project was a reminder to further hone in on my css skills. If I had more time, I would definitely focus in here.
-- I have a bug for submitting new choices - when the user hits the return key it deletes a choice instead! I would get to the bottom of this! 
+
 

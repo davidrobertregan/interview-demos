@@ -111,7 +111,11 @@ function Form() {
             body: JSON.stringify(body)
         })
         .then(resp => resp.json())
-        .then(data => console.log(data, body))
+        .then(data => {
+            console.log(data)
+            console.log(body)
+            alert("Your submission has been saved!")
+        })
     }
 
     const onClearForm = (e) => {
@@ -125,6 +129,8 @@ function Form() {
                 choices: []
             })
     }
+
+    let choiceButtons = choices.map(c => <button type="button" className='delete' key={c} name={c} onClick={onDeleteChoice}>❌ {c}</button>)
 
     return(
         <div className={"form-card"}>
@@ -151,9 +157,12 @@ function Form() {
                 <div className="column-container">
                     <label>Choices</label>
                     <div className='row-container'>
-                    {choices.map(c => <button className='delete' key={c} name={c} onClick={onDeleteChoice}>{c}</button>)}
-                    <input value={newChoice} onChange={onChoiceChange} type="text" placeholder='add choice'></input>
-                    <button type='click' onClick={onAddChoice}>Add choice</button>
+                        {choiceButtons}
+                    <div className='column-container'>
+                        <input value={newChoice} onChange={onChoiceChange} type="text" placeholder='add choice'></input>
+                        <div></div>
+                        <button onClick={onAddChoice}>✅</button>
+                    </div>
                     </div>
                 </div>
                 <div className="column-container">

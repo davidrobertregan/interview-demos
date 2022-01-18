@@ -1,10 +1,17 @@
 # User Form Builder 
-
+## To get the app running:
+  - cd into ui/form-builder-app
+  - run npm install
+  - run npm start
 ## My overall process for this project
 1. Reviewed tips online for take home challenges
 2. Read the instructions multiple times
 3. Worked through the core deliverables one by one
 4. Styled the form
+
+## Review Code here:
+- [Form.js](./src/components/Form.js)
+- [Index.css](./src/index.css)
 
 ## <b>How I approached two deliverables (1 & 2)</b>
 ### <b>"The builder can add and remove choices"</b>
@@ -42,5 +49,4 @@
 - Admittedly, this was my first take home code challenge in the job process. I put a little too much pressure on myself to do it quickly which led to some unneccessary pressure.
 - I had an issue with the return key deleting choices rather than adding - I learned this had to do with the "type" of the button: https://dzello.com/blog/2017/02/19/demystifying-enter-key-submission-for-react-forms/
 - This project was a reminder to further hone in on my css skills. If I had more time, I would definitely focus in here.
-
 
